@@ -1,0 +1,73 @@
+<section class="overflow-hidden">
+  <div class="w-screen min-h-screen bg-center bg-cover main-image bg-no-repeat"></div>
+  <div class="absolute top-0 bg-black min-h-screen w-full opacity-50"></div>
+  <div class="container absolute text-white top-3/12 ps-32 w-6/12">
+    <h2 class="text-6xl font-bold text-red-600 mb-14">Gear That Matches Your Vibe</h2>
+    <p class="text-xl mb-16">
+      Explore our curated collection of premium tech & accessories — handpicked for those who refuse
+      to settle for ordinary.
+    </p>
+    <button
+      class="px-12 py-6 rounded-xl bg-red-600 text-2xl font-semibold cursor-pointer hover:bg-red-950 transition duration-300"
+    >
+      Get Started
+    </button>
+  </div>
+</section>
+@defer (on timer(0.5s)) {
+  <section class="bg-black">
+    <div class="container w-8/12 mx-auto py-14">
+      <h3 class="text-white mb-9 text-3xl">Recommend Products</h3>
+      <div class="grid grid-cols-3 gap-8">
+        @for (product of productList; track product._id) {
+          <div
+            class="w-11/12 cursor-pointer bg-gray-700 px-2 rounded-2xl relative hover:-translate-y-2.5 transition duration-300 delay-75"
+          >
+            <div class="h-7/12 overflow-hidden rounded-t-2xl">
+              <img
+                [src]="product.imageCover"
+                class="w-full rounded-t-2xl h-full transition duration-300 object-cover hover:scale-115"
+                [title]="product.title"
+              />
+
+              <span
+                class="absolute top-1 left-3.5 px-5 py-1 bg-blue-600 font-medium text-white rounded-2xl"
+                ><i class="fa-solid fa-star me-1"></i> FEATURED</span
+              >
+              <span class="absolute top-10 left-3.5 px-5 py-1 bg-red-600 text-white rounded-2xl">
+                {{ product.quantity }} remaining</span
+              >
+              <span class="p-2 rounded-[500px] text-white absolute top-2 bg-gray-600 right-3.5"
+                ><i class="fa-regular fa-heart"></i
+              ></span>
+            </div>
+
+            <div class="p-3 border-b-[0.8px] border-b-gray-800">
+              <div class="flex justify-between items-center mb-3 pb-5">
+                <span class="text-lg">{{ product.brand.name }} </span>
+                <span
+                  class="px-3 py-0.5 text-yellow-500 bg-[#402a13f0] rounded-xl flex justify-center gap-2 items-center"
+                  ><i class="fa-solid fa-star text-xs"></i>
+                  {{ product.ratingsAverage }}
+                </span>
+              </div>
+              <span
+                class="text-white text-xl font-semibold pb-5 hover:text-red-500 transition duration-300"
+              >
+                {{ truncateWords(product.description, 10) }}
+              </span>
+            </div>
+            <div class="pt-5 flex justify-between items-center">
+              <span class="text-xl text-white"> {{ product.price }} EGP</span>
+              <span class="px-2 py-1 rounded-xl bg-gray-600"
+                >{{ product.ratingsQuantity }} Reviews</span
+              >
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+} @placeholder {
+  <h1 class="text-7xl text-white text-center bg-black pt-4">Loading...</h1>
+}

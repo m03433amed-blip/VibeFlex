@@ -1,0 +1,20 @@
+.meteor {
+  position: absolute;
+  width: 2px;
+  height: 120px;
+  background: linear-gradient(to bottom, white, transparent);
+  border-radius: 999px;
+  transform: rotate(135deg); /* ← غير من 45 ل 135 */
+  animation: meteor linear infinite;
+}
+
+@keyframes meteor {
+  0% {
+    transform: translateX(0) translateY(0) rotate(135deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(300px) translateY(300px) rotate(135deg);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,117 @@
+<section class="min-h-screen relative bg-black overflow-hidden">
+  <!-- overlay div -->
+  <div
+    class="min-h-screen w-screen bg-center bg-cover absolute transition-opacity duration-700"
+    [style.backgroundImage]="'url(' + currentBG + ')'"
+    [style.opacity]="bgFading ? 0 : 1"
+  ></div>
+
+  <div class="container py-24 w-10/12 mx-auto h-screen z-20 relative">
+    <div class="h-7/12">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-5xl font-extrabold text-red-600">
+          {{ currentMovie?.title ? currentMovie?.title : currentMovie?.name }}
+        </h3>
+        <div class="flex-col items-start text-white">
+          <p class="mb-1 font-semibold text-start text-xl">{{ currentMovie?.media_type }}</p>
+          <p class="text-3xl">
+            {{
+              currentMovie?.release_date ? currentMovie?.release_date : currentMovie?.first_air_date
+            }}
+          </p>
+        </div>
+      </div>
+      <div class="flex justify-between text-white">
+        <div class="w-9/12">
+          <p>{{ currentMovie?.overview }}</p>
+        </div>
+        <div>
+          <div class="flex-col justify-between items-center gap-10 text-center">
+            <p>Rating: {{ currentMovie?.vote_average }}</p>
+            <p>Total number of people: {{ currentMovie?.vote_count }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="text-center text-4xl font-semibold mb-5 text-white">Trending movies</h3>
+      <div class="flex justify-center items-center gap-5 px-24 h-full mt-9">
+        @for (movie of moviesList.slice(0, 6); track movie.id) {
+          <div
+            (click)="setActive(movie.id)"
+            [ngClass]="currentMovie?.id == movie.id ? 'active' : ''"
+            class="w-2/12 h-56 border-2 border-amber-50 rounded-2xl cursor-pointer transition duration-300"
+          >
+            <img
+              [src]="imageBase + movie.poster_path"
+              class="w-full h-full rounded-2xl object-cover"
+              [alt]="movie.title"
+            />
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+@defer (on idle) {
+  <section class="bg-black overflow-hidden relative">
+    <app-metros class="z-20"></app-metros>
+    <div class="container py-24 w-10/12 mx-auto">
+      <h3 class="text-white text-3xl font-body mb-8">Trending Now</h3>
+      <div class="grid grid-cols-4 gap-10 z-50">
+        @for (movie of moviesList.slice(6); track movie.id) {
+          <div
+            (click)="secsetActive(movie.id)"
+            class="cursor-pointer overflow-hidden rounded-4xl border-2 border-amber-50"
+          >
+            <img
+              [src]="imageBase + movie.poster_path"
+              [alt]="movie.name ? movie.name : movie.title"
+              class="hover:scale-110 transition duration-200"
+            />
+          </div>
+        }
+      </div>
+    </div>
+    @if (isay7aga) {
+      <div class="fixed inset-0 backdrop-blur-sm bg-black/50 z-20"></div>
+
+      <div
+        class="bg-neutral-900 w-6/12 h-11/12 rounded-3xl overflow-auto fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2"
+      >
+        <div class="relative">
+          <img
+            [src]="imageBase + secMovie?.backdrop_path"
+            [alt]="secMovie?.name ? secMovie?.name : secMovie?.title"
+            class="w-full h-full"
+          />
+          <i
+            (click)="isay7aga = false"
+            class="fa-solid fa-xmark text-white absolute top-5 right-6 text-xl cursor-pointer"
+          ></i>
+          <span class="ms-10 text-7xl font-bold text-white absolute top-72 block">{{
+            secMovie?.name ? secMovie?.name : secMovie?.title
+          }}</span>
+        </div>
+        <div class="p-10">
+          <div class="mb-10">
+            <span class="px-3 py-2 bg-neutral-600 rounded-xs me-5 text-amber-50 font-medium">{{
+              secMovie?.media_type
+            }}</span>
+            <span class="px-3 py-2 bg-neutral-600 rounded-xs me-5 text-amber-50 font-medium">{{
+              secMovie?.first_air_date ? secMovie?.first_air_date : secMovie?.release_date
+            }}</span>
+            <span class="px-3 py-2 bg-neutral-600 rounded-xs me-5 text-amber-50 font-medium">{{
+              secMovie?.adult ? 'Adult' : 'not Adult'
+            }}</span>
+          </div>
+          <p class="text-white mb-14 text-xl py-5">{{ secMovie?.overview }}</p>
+          <a href="" class="bg-red-600 px-17 py-5 rounded-2xl text-white text-2xl font-medium"
+            >Get Started</a
+          >
+        </div>
+      </div>
+    }
+  </section>
+}
