@@ -1,14 +1,18 @@
 <section class="overflow-hidden">
   <div class="w-screen min-h-screen bg-center bg-cover main-image bg-no-repeat"></div>
   <div class="absolute top-0 bg-black min-h-screen w-full opacity-50"></div>
-  <div class="container absolute text-white top-3/12 ps-32 w-6/12">
-    <h2 class="text-6xl font-bold text-red-600 mb-14">Gear That Matches Your Vibe</h2>
-    <p class="text-xl mb-16">
+  <div
+    class="container absolute text-white top-3/12 ps-6 sm:ps-16 md:ps-32 w-11/12 sm:w-8/12 md:w-6/12"
+  >
+    <h2 class="text-3xl sm:text-4xl md:text-6xl font-bold text-red-600 mb-6 sm:mb-10 md:mb-14">
+      Gear That Matches Your Vibe
+    </h2>
+    <p class="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 md:mb-16">
       Explore our curated collection of premium tech & accessories — handpicked for those who refuse
       to settle for ordinary.
     </p>
     <button
-      class="px-12 py-6 rounded-xl bg-red-600 text-2xl font-semibold cursor-pointer hover:bg-red-950 transition duration-300"
+      class="px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 rounded-xl bg-red-600 text-lg sm:text-xl md:text-2xl font-semibold cursor-pointer hover:bg-red-950 transition duration-300"
     >
       Get Started
     </button>
@@ -16,9 +20,9 @@
 </section>
 @defer (on timer(0.5s)) {
   <section class="bg-black">
-    <div class="container w-8/12 mx-auto py-14">
+    <div class="container w-11/12 sm:w-10/12 md:w-8/12 mx-auto py-14">
       <h3 class="text-white mb-9 text-3xl">Recommend Products</h3>
-      <div class="grid grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         @for (product of productList; track product._id) {
           <div
             class="w-11/12 cursor-pointer bg-gray-700 px-2 rounded-2xl relative hover:-translate-y-2.5 transition duration-300 delay-75"

@@ -6,23 +6,27 @@
     [style.opacity]="bgFading ? 0 : 1"
   ></div>
 
-  <div class="container py-24 w-10/12 mx-auto h-screen z-20 relative">
+  <div class="container py-24 w-11/12 md:w-10/12 mx-auto h-screen z-20 relative">
     <div class="h-7/12">
-      <div class="flex justify-between items-center mb-6">
-        <h3 class="text-5xl font-extrabold text-red-600">
+      <div
+        class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 sm:gap-0"
+      >
+        <h3 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-red-600">
           {{ currentMovie?.title ? currentMovie?.title : currentMovie?.name }}
         </h3>
         <div class="flex-col items-start text-white">
-          <p class="mb-1 font-semibold text-start text-xl">{{ currentMovie?.media_type }}</p>
-          <p class="text-3xl">
+          <p class="mb-1 font-semibold text-start text-lg sm:text-xl">
+            {{ currentMovie?.media_type }}
+          </p>
+          <p class="text-xl sm:text-3xl">
             {{
               currentMovie?.release_date ? currentMovie?.release_date : currentMovie?.first_air_date
             }}
           </p>
         </div>
       </div>
-      <div class="flex justify-between text-white">
-        <div class="w-9/12">
+      <div class="flex flex-col sm:flex-row justify-between text-white gap-4 sm:gap-0">
+        <div class="w-full sm:w-9/12">
           <p>{{ currentMovie?.overview }}</p>
         </div>
         <div>
@@ -57,9 +61,9 @@
 @defer (on idle) {
   <section class="bg-black overflow-hidden relative">
     <app-metros class="z-20"></app-metros>
-    <div class="container py-24 w-10/12 mx-auto">
+    <div class="container py-24 w-11/12 md:w-10/12 mx-auto">
       <h3 class="text-white text-3xl font-body mb-8">Trending Now</h3>
-      <div class="grid grid-cols-4 gap-10 z-50">
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 z-50">
         @for (movie of moviesList.slice(6); track movie.id) {
           <div
             (click)="secsetActive(movie.id)"
@@ -78,7 +82,7 @@
       <div class="fixed inset-0 backdrop-blur-sm bg-black/50 z-20"></div>
 
       <div
-        class="bg-neutral-900 w-6/12 h-11/12 rounded-3xl overflow-auto fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2"
+        class="bg-neutral-900 w-11/12 sm:w-8/12 md:w-6/12 h-11/12 rounded-3xl overflow-auto fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2"
       >
         <div class="relative">
           <img
@@ -90,11 +94,12 @@
             (click)="isay7aga = false"
             class="fa-solid fa-xmark text-white absolute top-5 right-6 text-xl cursor-pointer"
           ></i>
-          <span class="ms-10 text-7xl font-bold text-white absolute top-72 block">{{
-            secMovie?.name ? secMovie?.name : secMovie?.title
-          }}</span>
+          <span
+            class="ms-10 text-4xl sm:text-5xl md:text-7xl font-bold text-white absolute top-72 block"
+            >{{ secMovie?.name ? secMovie?.name : secMovie?.title }}</span
+          >
         </div>
-        <div class="p-10">
+        <div class="p-5 sm:p-10">
           <div class="mb-10">
             <span class="px-3 py-2 bg-neutral-600 rounded-xs me-5 text-amber-50 font-medium">{{
               secMovie?.media_type
@@ -106,8 +111,10 @@
               secMovie?.adult ? 'Adult' : 'not Adult'
             }}</span>
           </div>
-          <p class="text-white mb-14 text-xl py-5">{{ secMovie?.overview }}</p>
-          <a href="" class="bg-red-600 px-17 py-5 rounded-2xl text-white text-2xl font-medium"
+          <p class="text-white mb-14 text-lg sm:text-xl py-5">{{ secMovie?.overview }}</p>
+          <a
+            href=""
+            class="bg-red-600 px-10 sm:px-17 py-5 rounded-2xl text-white text-xl sm:text-2xl font-medium"
             >Get Started</a
           >
         </div>
